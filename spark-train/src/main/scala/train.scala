@@ -26,6 +26,12 @@ object AnomalyDetection {
     val normalizedData = loadData(sc)
     val model = trainModel(normalizedData)
     val file = new File("../dataset/trainOutput.txt")
+    //---------------------Aded by ThuF---------------------
+    println(">>>[TrainOutput] can be found at: " + file.getAbsolutePath());
+    if(!file.exists()) {
+        file.createNewFile();
+    }
+    //-------------------------------------------------------
     val bw = new BufferedWriter(new FileWriter(file))
     val centroid = model.clusterCenters(0).toString // save centroid to file
   	bw.write(centroid)
